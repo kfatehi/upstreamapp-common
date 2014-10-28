@@ -1,6 +1,6 @@
 {
   "name": "upstreamapp-common",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "common code in upstreamapp.com components",
   "main": "index.js",
   "scripts": {
