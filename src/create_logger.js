@@ -28,8 +28,6 @@ module.exports = function(config) {
   if (config.papertrail) {
     console.log('Logging to papertrail!')
     transports.push(papertrailTransport())
-  } else if (process.env.NODE_ENV === 'test') {
-    // no logger in test
   } else {
     transports.push(consoleColorTransport())
   }
