@@ -3,16 +3,17 @@ var path = require('path')
   , loadYamlFile = require('./load_yaml_file')
   , Papertrail = require('winston-papertrail').Papertrail
 
-module.exports = function(loggerConfig) {
-
+module.exports = function(config) {
+  var config = config || {};
   var papertrailTransport = function() {
     return new Papertrail({
-      host: loggerConfig.papertrail.host,
-      port: loggerConfig.papertrail.port,
+      handleExceptions: true,
+      host: config.papertrail.host,
+      port: config.papertrail.port,
       hostname: require('os').hostname(),
       program: require('path').basename(process.argv[1]),
       logFormat: function(level, message) {
-        return level+': '+message
+        return '[['+level+']] '+message
       }
     })
   }
@@ -24,7 +25,7 @@ module.exports = function(loggerConfig) {
   }
 
   var transports = []
-  if (process.env.NODE_ENV === 'production') {
+  if (config.papertrail) {
     console.log('Logging to papertrail!')
     transports.push(papertrailTransport())
   } else if (process.env.NODE_ENV === 'test') {
