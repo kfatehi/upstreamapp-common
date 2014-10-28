@@ -13,7 +13,7 @@ module.exports = function(config) {
       hostname: require('os').hostname(),
       program: require('path').basename(process.argv[1]),
       logFormat: function(level, message) {
-        return '[['+level+']] '+message
+        return '['+level+'] '+message
       }
     })
   }
