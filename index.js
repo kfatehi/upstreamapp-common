@@ -1,5 +1,6 @@
 module.exports = function(config) {
-  var logger = config ? require('./src/create_logger')(config.logger) : null
+  var config = config || {};
+  var logger = require('./src/create_logger')(config.logger)
 
   return {
     logger: logger,
